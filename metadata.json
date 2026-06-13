@@ -1,0 +1,6 @@
+{
+  "name": "BursaryBridge",
+  "description": "A centralized student bursary portal for South African university students to discover and apply for matching bursaries.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
