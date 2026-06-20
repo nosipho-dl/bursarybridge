@@ -7,10 +7,11 @@ import React, { useState, useEffect } from "react";
 import LandingPage from "./components/LandingPage";
 import StudentPortal from "./components/StudentPortal";
 import InstitutionPortal from "./components/InstitutionPortal";
-import SuperAdminPortal from "./components/SuperAdminPortal";
+import PlatformAdminPortal from "./components/PlatformAdminPortal";
 import RoleSwitcher from "./components/RoleSwitcher";
+import PoliciesPage from "./components/PoliciesPage";
 
-import { Institution, Bursary, StudentProfile, BursaryApplication, AuditLog, Faculty, Department, Programme } from "./types";
+import { Institution, Bursary, StudentProfile, BursaryApplication, AuditLog, Faculty, Department, Programme, Sponsor } from "./types";
 import { 
   initialInstitutions, 
   initialBursaries, 
@@ -18,11 +19,13 @@ import {
   initialAuditLogs,
   initialFaculties,
   initialDepartments,
-  initialProgrammes
+  initialProgrammes,
+  initialSponsors
 } from "./data";
 
 export default function App() {
   // Central State with local storage persistence
+  const [showPolicies, setShowPolicies] = useState<boolean>(false);
   const [institutions, setInstitutions] = useState<Institution[]>(() => {
     const saved = localStorage.getItem("bb_institutions");
     return saved ? JSON.parse(saved) : initialInstitutions;
@@ -63,9 +66,27 @@ export default function App() {
     return saved ? JSON.parse(saved) : null;
   });
 
+  const [sponsors, setSponsors] = useState<Sponsor[]>(() => {
+    const saved = localStorage.getItem("bb_sponsors");
+    return saved ? JSON.parse(saved) : initialSponsors;
+  });
+
   // Simulator navigation
-  const [currentRole, setCurrentRole] = useState<"visitor" | "student" | "admin" | "superadmin">("visitor");
-  const [selectedAdminUniId, setSelectedAdminUniId] = useState<string>("uct");
+  const [currentRole, setCurrentRole] = useState<"visitor" | "student" | "admin" | "platformadmin">("visitor");
+  const [selectedAdminUniId, setSelectedAdminUniId] = useState<string>(() => {
+    const saved = localStorage.getItem("bb_institutions");
+    const instList = saved ? JSON.parse(saved) : initialInstitutions;
+    return instList[0]?.id || "";
+  });
+
+  // Sync selectedAdminUniId with available institutions
+  useEffect(() => {
+    if (institutions.length > 0 && (!selectedAdminUniId || !institutions.some(i => i.id === selectedAdminUniId))) {
+      setSelectedAdminUniId(institutions[0].id);
+    } else if (institutions.length === 0 && selectedAdminUniId !== "") {
+      setSelectedAdminUniId("");
+    }
+  }, [institutions, selectedAdminUniId]);
 
   // Sync to local storage
   useEffect(() => {
@@ -99,6 +120,10 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem("bb_student_profile", studentProfile ? JSON.stringify(studentProfile) : "");
   }, [studentProfile]);
+
+  useEffect(() => {
+    localStorage.setItem("bb_sponsors", JSON.stringify(sponsors));
+  }, [sponsors]);
 
   // Recalculate listings totals dynamically for institution summaries
   useEffect(() => {
@@ -198,7 +223,7 @@ export default function App() {
     );
   };
 
-  const handleUpdateApplicationStatus = (appId: string, status: "Approved" | "Declined") => {
+  const handleUpdateApplicationStatus = (appId: string, status: "Received" | "Under Review" | "Eligible" | "Approved" | "Declined") => {
     setApplications(prev => prev.map(app => (app.id === appId ? { ...app, status } : app)));
     const targetApp = applications.find(a => a.id === appId);
     const uni = institutions.find(i => i.id === selectedAdminUniId);
@@ -209,12 +234,12 @@ export default function App() {
     );
   };
 
-  // Super Admin operations
+  // Platform Admin operations
   const handleOnboardInstitution = (newUni: Institution) => {
     setInstitutions(prev => [...prev, newUni]);
     pushAudit(
-      "Global Super Admin",
-      "Super Admin",
+      "Global Platform Admin",
+      "Platform Admin",
       `Provisioned digital workspace boundary & onboarding email suffix: ${newUni.name} (${newUni.domain})`
     );
   };
@@ -230,12 +255,17 @@ export default function App() {
       setFaculties(initialFaculties);
       setDepartments(initialDepartments);
       setProgrammes(initialProgrammes);
+      setSponsors(initialSponsors);
       setStudentProfile(null);
       setCurrentRole("visitor");
       setSelectedAdminUniId("uct");
       alert("Flushed complete workspace registries to standard seeds successfully.");
     }
   };
+
+  if (showPolicies) {
+    return <PoliciesPage onClose={() => setShowPolicies(false)} />;
+  }
 
   return (
     <div className="min-h-screen relative flex flex-col bg-surface">
@@ -251,6 +281,8 @@ export default function App() {
               setCurrentRole("admin");
             }}
             institutions={institutions}
+            sponsors={sponsors}
+            onViewPolicies={() => setShowPolicies(true)}
           />
         )}
 
@@ -266,6 +298,7 @@ export default function App() {
             applications={applications}
             onAddNewApplication={handleAddNewApplication}
             onResetStudentState={handleResetStudentState}
+            onViewPolicies={() => setShowPolicies(true)}
           />
         )}
 
@@ -285,14 +318,18 @@ export default function App() {
             onUpdateFaculties={setFaculties}
             onUpdateDepartments={setDepartments}
             onUpdateProgrammes={setProgrammes}
+            onViewPolicies={() => setShowPolicies(true)}
           />
         )}
 
-        {currentRole === "superadmin" && (
-          <SuperAdminPortal
+        {currentRole === "platformadmin" && (
+          <PlatformAdminPortal
             institutions={institutions}
             auditLogs={auditLogs}
+            sponsors={sponsors}
+            onUpdateSponsors={setSponsors}
             onOnboardInstitution={handleOnboardInstitution}
+            onViewPolicies={() => setShowPolicies(true)}
           />
         )}
       </div>

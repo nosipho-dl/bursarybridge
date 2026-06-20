@@ -87,7 +87,7 @@ export interface BursaryApplication {
   studentFaculty: string;
   uploadedDocuments: string[]; // actual uploaded file keys
   submittedAt: string;
-  status: "Under Review" | "Approved" | "Declined";
+  status: "Received" | "Under Review" | "Eligible" | "Approved" | "Declined";
 }
 
 export interface AuditLog {
@@ -97,4 +97,11 @@ export interface AuditLog {
   role: string;
   action: string;
   ipAddress: string;
+}
+
+export interface Sponsor {
+  id: string;
+  name: string;
+  quota: string;
+  focus: string;
 }

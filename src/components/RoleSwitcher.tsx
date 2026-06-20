@@ -7,8 +7,8 @@ import React, { useState } from "react";
 import { User, ShieldAlert, Library, Sparkles, MonitorSmartphone } from "lucide-react";
 
 interface RoleSwitcherProps {
-  currentRole: "visitor" | "student" | "admin" | "superadmin";
-  onRoleChange: (role: "visitor" | "student" | "admin" | "superadmin") => void;
+  currentRole: "visitor" | "student" | "admin" | "platformadmin";
+  onRoleChange: (role: "visitor" | "student" | "admin" | "platformadmin") => void;
   selectedAdminUniId: string;
   onAdminUniChange: (uniId: string) => void;
   institutions: Array<{ id: string; name: string }>;
@@ -30,9 +30,9 @@ export default function RoleSwitcher({
   return (
     <div className="fixed bottom-4 right-4 z-50 font-hanken">
       {isOpen ? (
-        <div className="bg-primary border border-outline-variant/30 text-white rounded-2xl shadow-2xl p-4 w-80 backdrop-blur-md bg-opacity-95 transition-all">
+        <div className="bg-[#001F3F] border border-[#7FB3D5]/20 text-white rounded-2xl shadow-2xl p-4 w-80 backdrop-blur-md bg-opacity-95 transition-all">
           <div className="flex items-center justify-between border-b border-white/10 pb-2 mb-3">
-            <span className="flex items-center gap-2 font-bold text-sm tracking-wider uppercase text-secondary-container">
+            <span className="flex items-center gap-2 font-bold text-sm tracking-wider uppercase text-[#7FB3D5]">
               <MonitorSmartphone className="w-4 h-4" />
               Dev Sandbox Controls
             </span>
@@ -53,7 +53,7 @@ export default function RoleSwitcher({
               onClick={() => onRoleChange("visitor")}
               className={`w-full text-left px-3 py-2 rounded-lg text-xs flex items-center justify-between transition-all ${
                 currentRole === "visitor"
-                  ? "bg-secondary-container text-primary font-bold shadow-md"
+                  ? "bg-[#005A8D] text-white font-bold shadow-md"
                   : "bg-white/5 text-white/90 hover:bg-white/10"
               }`}
             >
@@ -68,7 +68,7 @@ export default function RoleSwitcher({
               onClick={() => onRoleChange("student")}
               className={`w-full text-left px-3 py-2 rounded-lg text-xs flex items-center justify-between transition-all ${
                 currentRole === "student"
-                  ? "bg-secondary-container text-primary font-bold shadow-md"
+                  ? "bg-[#005A8D] text-white font-bold shadow-md"
                   : "bg-white/5 text-white/90 hover:bg-white/10"
               }`}
             >
@@ -86,7 +86,7 @@ export default function RoleSwitcher({
                 onClick={() => onRoleChange("admin")}
                 className={`w-full text-left px-2 py-1 rounded-md text-xs flex items-center justify-between transition-all ${
                   currentRole === "admin"
-                    ? "text-secondary-fixed-dim font-bold"
+                    ? "text-[#7FB3D5] font-bold"
                     : "text-white/90 hover:text-white"
                 }`}
               >
@@ -103,7 +103,7 @@ export default function RoleSwitcher({
                   <select
                     value={selectedAdminUniId}
                     onChange={(e) => onAdminUniChange(e.target.value)}
-                    className="bg-primary border border-white/20 rounded px-1 py-0.5 text-[11px] text-white focus:outline-none"
+                    className="bg-[#001F3F] border border-white/20 rounded px-1 py-0.5 text-[11px] text-white focus:outline-none"
                   >
                     {institutions.map((inst) => (
                       <option key={inst.id} value={inst.id}>
@@ -116,16 +116,16 @@ export default function RoleSwitcher({
             </div>
 
             <button
-              onClick={() => onRoleChange("superadmin")}
+              onClick={() => onRoleChange("platformadmin")}
               className={`w-full text-left px-3 py-2 rounded-lg text-xs flex items-center justify-between transition-all ${
-                currentRole === "superadmin"
-                  ? "bg-secondary-container text-primary font-bold shadow-md"
+                currentRole === "platformadmin"
+                  ? "bg-[#005A8D] text-white font-bold shadow-md"
                   : "bg-white/5 text-white/90 hover:bg-white/10"
               }`}
             >
               <span className="flex items-center gap-2">
                 <ShieldAlert className="w-3.5 h-3.5" />
-                4. Network Super Admin
+                4. Platform Admin
               </span>
               <span className="text-[10px] uppercase opacity-70">All Unis</span>
             </button>
@@ -135,7 +135,7 @@ export default function RoleSwitcher({
             <span className="text-white/40">Tenant Lock Simulation: Active</span>
             <button
               onClick={onResetSimulation}
-              className="text-secondary-fixed-dim hover:underline font-bold"
+              className="text-[#7FB3D5] hover:underline font-bold"
             >
               Reset Data
             </button>
@@ -144,9 +144,9 @@ export default function RoleSwitcher({
       ) : (
         <button
           onClick={() => setIsOpen(true)}
-          className="bg-primary hover:bg-primary-container border border-outline-variant/30 text-white rounded-full p-3 shadow-2xl flex items-center gap-2 transition-all"
+          className="bg-[#001F3F] hover:bg-[#003B5C] border border-[#7FB3D5]/20 text-white rounded-full p-3 shadow-2xl flex items-center gap-2 transition-all"
         >
-          <MonitorSmartphone className="w-5 h-5 text-secondary-container animate-pulse" />
+          <MonitorSmartphone className="w-5 h-5 text-[#7FB3D5] animate-pulse" />
           <span className="text-xs font-bold font-hanken pr-1">Toggle Dev Controls</span>
         </button>
       )}

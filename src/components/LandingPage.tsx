@@ -4,221 +4,251 @@
  */
 
 import React from "react";
-import { GraduationCap, ArrowRight, UserCheck, ShieldCheck, Award, FileSpreadsheet } from "lucide-react";
+import { GraduationCap, ArrowRight, ShieldCheck, Award, CheckCircle, Sparkles } from "lucide-react";
+import { Sponsor } from "../types";
 
 interface LandingPageProps {
   onStartRegistration: () => void;
   onLoginAsStudent: () => void;
   onLoginAsAdmin: () => void;
   institutions: Array<{ id: string; name: string; location: string }>;
+  sponsors: Sponsor[];
+  onViewPolicies: () => void;
 }
 
 export default function LandingPage({
   onStartRegistration,
   onLoginAsStudent,
   onLoginAsAdmin,
-  institutions
+  institutions,
+  sponsors,
+  onViewPolicies
 }: LandingPageProps) {
   return (
-    <div className="min-h-screen bg-surface flex flex-col font-sans">
+    <div className="min-h-screen bg-[#EAEDED] flex flex-col font-sans" id="landing_page_root">
       {/* Navigation Header */}
-      <header className="sticky top-0 bg-white/90 backdrop-blur-md border-b border-outline-variant/30 z-50 transition-all">
+      <header className="sticky top-0 bg-white/95 backdrop-blur-md border-b border-gray-100 z-50 shadow-sm transition-all" id="main_header">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center">
-              <GraduationCap className="w-6 h-6 text-secondary-container" />
+          <div className="flex items-center gap-2" id="header_logo_group">
+            <div className="w-9 h-9 rounded-lg bg-[#003B5C] flex items-center justify-center shadow-sm">
+              <GraduationCap className="w-5 h-5 text-white" />
             </div>
-            <span className="font-headline text-headline-lg font-bold text-primary tracking-tight">
-              Bursary<span className="text-secondary-fixed opacity-90">Bridge</span>
+            <span className="font-headline text-lg font-black text-neutral-900 tracking-tight">
+              Bursary<span className="text-[#7FB3D5]">Bridge</span>
             </span>
           </div>
 
-          <div className="flex items-center gap-6 font-hanken">
+          <div className="flex items-center gap-6 font-sans text-xs font-bold" id="header_nav_group">
             <button
               onClick={onLoginAsStudent}
-              className="text-primary font-bold text-sm tracking-wide hover:text-secondary hover:underline underline-offset-4 transition-all"
+              className="text-neutral-600 hover:text-[#005A8D] transition-all font-bold"
+              id="link_student_login"
             >
               Student Portal
             </button>
             <button
               onClick={onLoginAsAdmin}
-              className="text-on-surface-variant font-medium text-sm tracking-wide hover:text-primary transition-all"
+              className="text-neutral-500 hover:text-neutral-800 transition-all font-medium"
+              id="link_admin_login"
             >
-              Institution Portal
+              Institution Node
             </button>
             <button
               onClick={onStartRegistration}
-              className="bg-secondary-container text-on-secondary-container font-extrabold px-5 py-2 rounded-lg text-sm tracking-wide shadow-sm hover:shadow-md hover:bg-secondary transition-all active:scale-95 duration-150"
+              className="bg-[#005A8D] hover:bg-[#003B5C] text-white px-4 py-2 rounded-lg transition-all shadow-sm flex items-center gap-1 active:scale-95 text-xs font-extrabold uppercase tracking-wider"
+              id="btn_get_started"
             >
-              Get Started
+              Apply Now
+              <ArrowRight className="w-3 h-3" />
             </button>
           </div>
         </div>
       </header>
 
-      {/* Hero Section */}
+      {/* Main viewport */}
       <main className="flex-grow">
-        <section className="bg-gradient-to-b from-primary-container to-primary text-white py-20 px-6 relative overflow-hidden">
-          <div className="absolute inset-0 opacity-10 pointer-events-none">
-            {/* Grid background effect */}
-            <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+        {/* Hero Section */}
+        <section className="bg-[#001F3F] text-white py-24 px-6 border-b border-slate-800 relative" id="hero_section">
+          <div className="absolute inset-0 opacity-5 pointer-events-none">
+            <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(to_right,#ffffff12_1px,transparent_1px),linear-gradient(to_bottom,#ffffff12_1px,transparent_1px)] bg-[size:32px_32px]"></div>
           </div>
 
-          <div className="max-w-4xl mx-auto text-center relative z-10 flex flex-col items-center">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-secondary-fixed font-hanken text-label-sm border border-white/20 mb-6 animate-pulse">
-              <span className="w-2 h-2 rounded-full bg-secondary-container"></span>
-              South African missing middle & unfunded student bursary portal
+          <div className="max-w-4xl mx-auto text-center flex flex-col items-center relative z-10" id="hero_content_wrapper">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#7FB3D5]/10 text-[#7FB3D5] font-sans text-[11px] font-bold border border-[#7FB3D5]/20 rounded-full mb-6" id="hero_badge">
+              <Sparkles className="w-3.5 h-3.5 text-[#7FB3D5]" />
+              POPIA Compliant Verification Network
             </div>
 
-            <h1 className="font-headline text-5xl md:text-6xl font-bold tracking-tight text-white mb-6 leading-tight max-w-3xl">
-              Find bursaries you <span className="text-secondary-container underline decoration-wavy decoration-2 underline-offset-8">actually qualification match</span> for.
+            <h1 className="text-4xl md:text-5.5xl font-black tracking-tight text-white mb-6 leading-tight max-w-3xl" id="hero_heading">
+              Secure Alignment for <span className="text-[#7FB3D5] underline decoration-[#7FB3D5]/40 underline-offset-4">Missing Middle</span> South African Students
             </h1>
 
-            <p className="font-sans text-body-lg text-primary-fixed-dim max-w-2xl mb-10 leading-relaxed opacity-95">
-              Tired of endless forms only to discover you don't qualify? BursaryBridge auto-matches your GPA and faculty profile against exclusive university-specific corporate sponsorships. No hidden fees. Fully POPIA compliant.
+            <p className="text-slate-305 text-slate-300 text-sm md:text-base max-w-2xl mb-10 leading-relaxed font-sans" id="hero_description">
+              Tired of endless bursary applications only to find you don't match the criteria? BursaryBridge instantly verifies your university enrollment, course metrics, and GPA to map you with private corporate funds inside your isolated institution workspace.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 font-hanken">
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto" id="hero_cta_buttons">
               <button
                 onClick={onStartRegistration}
-                className="bg-secondary-container text-primary font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-secondary-fixed hover:shadow-lg hover:-translate-y-0.5 transition-all active:scale-95 duration-150 text-base"
+                className="bg-[#005A8D] hover:bg-[#003B5C] text-white font-extrabold px-8 py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md active:scale-95 text-xs uppercase tracking-wider"
+                id="btn_hero_register"
               >
-                Launch Eligibility Check
+                Register & Verify Eligibility
                 <ArrowRight className="w-4 h-4" />
               </button>
               <button
                 onClick={onLoginAsStudent}
-                className="border border-white/20 hover:bg-white/10 text-white px-8 py-4 rounded-xl font-bold transition-all"
+                className="border border-white/25 hover:bg-white/5 text-gray-200 px-8 py-3.5 rounded-xl font-bold transition-all text-xs uppercase tracking-wider"
+                id="btn_hero_login"
               >
-                Access My Profile
+                Sign In to Student Portal
               </button>
             </div>
-
-            {/* Quick stats banner */}
-            <div className="grid grid-cols-3 gap-6 md:gap-12 mt-16 max-w-2xl border-t border-white/10 pt-8 w-full font-hanken">
-              <div className="text-center">
-                <div className="text-3xl font-extrabold text-secondary-container">R412M+</div>
-                <div className="text-[11px] uppercase tracking-wider text-primary-fixed-dim mt-1">Disbursed Funds</div>
-              </div>
-              <div className="text-center border-x border-white/10 px-4">
-                <div className="text-3xl font-extrabold text-secondary-container">94%</div>
-                <div className="text-[11px] uppercase tracking-wider text-primary-fixed-dim mt-1">Average Match Rate</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-extrabold text-secondary-container">24 Hour</div>
-                <div className="text-[11px] uppercase tracking-wider text-primary-fixed-dim mt-1">Status Turnaround</div>
-              </div>
-            </div>
           </div>
         </section>
 
-        {/* 3-Step Explainer Section */}
-        <section className="py-20 px-6 max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="text-xs font-bold uppercase tracking-widest text-secondary mb-2 block font-hanken">How it works</span>
-            <h2 className="font-headline text-headline-lg text-primary font-bold">Bridging the gap to tertiary funding in 3 steps</h2>
-            <p className="text-on-surface-variant font-sans max-w-xl mx-auto mt-2 text-body-md">
-              Securely register, visual check academic benchmarks live, and submit documents straight to sponsoring corporate boards.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative font-hanken">
-            {/* Step 1 */}
-            <div className="bg-white border border-outline-variant/50 p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow relative">
-              <div className="w-12 h-12 rounded-xl bg-primary-container/10 flex items-center justify-center text-primary font-extrabold text-lg mb-6">
-                1
-              </div>
-              <h3 className="font-headline text-xl font-bold text-primary mb-3">Register Student profile</h3>
-              <p className="text-on-surface-variant text-sm leading-relaxed font-sans">
-                Enter your basic details. Suffix email domain verification automatically locks your profile to your registered institution (e.g. UCT, DUT, Wits), satisfying strict multi-tenant boundary checks.
-              </p>
-            </div>
-
-            {/* Step 2 */}
-            <div className="bg-white border border-outline-variant/50 p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow relative">
-              <div className="w-12 h-12 rounded-xl bg-primary-container/10 flex items-center justify-center text-primary font-extrabold text-lg mb-6">
-                2
-              </div>
-              <h3 className="font-headline text-xl font-bold text-primary mb-3">Visual Academic Live Match</h3>
-              <p className="text-on-surface-variant text-sm leading-relaxed font-sans">
-                Type your active academic GPA. Our micro-match engine updates eligibility tiers (Tier 1-3) real-time, instantly displaying matching sponsors with transparency.
-              </p>
-            </div>
-
-            {/* Step 3 */}
-            <div className="bg-white border border-outline-variant/50 p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow relative">
-              <div className="w-12 h-12 rounded-xl bg-primary-container/10 flex items-center justify-center text-primary font-extrabold text-lg mb-6">
-                3
-              </div>
-              <h3 className="font-headline text-xl font-bold text-primary mb-3">Apply Safely</h3>
-              <p className="text-on-surface-variant text-sm leading-relaxed font-sans">
-                Upload required secure documents (e.g. ID copies, current student transcripts) using our smart checklist. Submit straight to institutional reviews in a tap.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Missing Middle Focus Callout Banner */}
-        <section className="bg-surface-container py-16 px-6 border-y border-outline-variant/30">
-          <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12 bg-white p-8 md:p-12 rounded-3xl border border-outline-variant shadow-sm">
-            <div className="flex-grow">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-[#E8F0FE] text-primary font-hanken text-label-sm font-bold mb-4">
-                <UserCheck className="w-4 h-4 text-[#1A73E8]" />
-                Dedicated Missing Middle Support
-              </div>
-              <h3 className="font-headline text-2xl md:text-3xl font-bold text-primary mb-4">
-                What does missing middle mean?
-              </h3>
-              <p className="text-on-surface-variant text-sm md:text-base leading-relaxed font-sans max-w-2xl">
-                Many South African family profiles fall just average of NSFAS support income caps, leaving hard-working students with zero tertiary aid. Symmetrically, corporate sponsors look for eligible candidates. BursaryBridge acts as the high-integrity digital gateway linking both parties.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Sponsoring / Partner Institutions Grid */}
-        <section className="py-20 px-6 max-w-7xl mx-auto">
+        {/* Eligibility Snapshot Card Panel */}
+        <section className="py-20 px-6 max-w-7xl mx-auto" id="eligibility_snapshot">
           <div className="text-center mb-12">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#00875A] font-hanken block mb-2">Our university partners</span>
-            <h2 className="font-headline text-2xl font-bold text-primary">Serving South Africa's leading institutions</h2>
-            <p className="text-on-surface-variant text-sm mt-1">Multi-tenant boundary guarantees complete data isolation between workspaces.</p>
+            <span className="text-[10px] uppercase font-extrabold tracking-widest text-[#005A8D] bg-[#7FB3D5]/10 px-2.5 py-1 rounded">Eligibility Criteria</span>
+            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 mt-3">Who Is Eligible to Apply?</h2>
+            <p className="text-gray-500 text-sm mt-2 max-w-md mx-auto">Verify your compliance with general sponsor baselines before onboarding.</p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-6 gap-6 items-center justify-center text-center font-hanken">
-            {institutions.map((inst) => (
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 font-sans">
+            {/* 1 */}
+            <div className="bg-white border border-gray-200/80 p-6 rounded-2xl shadow-sm flex flex-col justify-between" id="snapshot_card_1">
+              <div>
+                <CheckCircle className="w-5 h-5 text-[#005A8D] mb-4" />
+                <h3 className="font-extrabold text-slate-900 text-sm uppercase mb-1">South African Citizens</h3>
+                <p className="text-xs text-gray-500 leading-relaxed">
+                  Applicants must hold a valid 13-digit South African National Identity Number (SA ID) for secure automated verification.
+                </p>
+              </div>
+              <span className="text-[10px] text-[#005A8D] font-bold mt-4 font-mono">ID Check Required</span>
+            </div>
+
+            {/* 2 */}
+            <div className="bg-white border border-gray-200/80 p-6 rounded-2xl shadow-sm flex flex-col justify-between" id="snapshot_card_2">
+              <div>
+                <CheckCircle className="w-5 h-5 text-[#005A8D] mb-4" />
+                <h3 className="font-extrabold text-slate-900 text-sm uppercase mb-1">Bursary GPA Limit</h3>
+                <p className="text-xs text-gray-500 leading-relaxed">
+                  Active tertiary students maintaining a cumulative academic average or matric score of 65% GPA and above.
+                </p>
+              </div>
+              <span className="text-[10px] text-[#005A8D] font-bold mt-4 font-mono">Average &ge; 65% Minimum</span>
+            </div>
+
+            {/* 3 */}
+            <div className="bg-white border border-gray-200/80 p-6 rounded-2xl shadow-sm flex flex-col justify-between" id="snapshot_card_3">
+              <div>
+                <CheckCircle className="w-5 h-5 text-[#005A8D] mb-4" />
+                <h3 className="font-extrabold text-slate-900 text-sm uppercase mb-1">Financial Classification</h3>
+                <p className="text-xs text-gray-500 leading-relaxed">
+                  Targeted at unfunded, partially funded, or "missing middle" household groups struggling with commercial tuition loans.
+                </p>
+              </div>
+              <span className="text-[10px] text-[#005A8D] font-bold mt-4 font-mono font-bold">Aid Isolation Focus</span>
+            </div>
+
+            {/* 4 */}
+            <div className="bg-white border border-gray-200/80 p-6 rounded-2xl shadow-sm flex flex-col justify-between" id="snapshot_card_4">
+              <div>
+                <CheckCircle className="w-5 h-5 text-[#005A8D] mb-4" />
+                <h3 className="font-extrabold text-slate-900 text-sm uppercase mb-1">Email Domain Lock</h3>
+                <p className="text-xs text-gray-500 leading-relaxed">
+                  Must possess an official active student email address from a supported university (e.g., UCT, DUT, WITS, UKZN).
+                </p>
+              </div>
+              <span className="text-[10px] text-[#005A8D] font-bold mt-4 font-mono">Workspace Sync Lock</span>
+            </div>
+          </div>
+        </section>
+
+        {/* Dynamic Part: Trusted Sponsors Section */}
+        <section className="bg-white py-20 px-6 border-y border-gray-100" id="trusted_sponsors">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-12">
+              <span className="text-[10px] text-[#005A8D] font-extrabold uppercase tracking-widest bg-[#7FB3D5]/10 px-2.5 py-1 rounded block mb-2 w-max mx-auto">Sponsors & Sponsors</span>
+              <h2 className="text-2xl font-black text-slate-900">Our Partnered Corporate Sponsors</h2>
+              <p className="text-xs text-slate-500 mt-2 max-w-sm mx-auto">Entities actively distributing funds, reviewing qualifiers, and tracking allocations.</p>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4" id="sponsors_grid">
+              {sponsors.map((sponsor, i) => (
+                <div
+                  key={sponsor.id}
+                  className="bg-[#EAEDED]/30 border border-slate-200 p-5 rounded-xl text-center flex flex-col justify-center items-center gap-1 hover:border-[#005A8D]/45 hover:scale-[1.01] hover:bg-white transition-all h-28 cursor-pointer shadow-sm"
+                  id={`sponsor_card_${i}`}
+                >
+                  <Award className="w-5 h-5 text-[#005A8D]" />
+                  <div className="font-extrabold text-slate-900 text-xs tracking-tight">{sponsor.name}</div>
+                  <div className="text-[9px] text-[#005A8D] font-black uppercase tracking-wider leading-none mt-1 bg-[#7FB3D5]/10 px-1.5 py-0.5 rounded">{sponsor.focus}</div>
+                  <div className="text-[8px] text-gray-400 font-bold uppercase mt-1">{sponsor.quota}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Partner Universities Section */}
+        <section className="py-20 px-6 max-w-7xl mx-auto" id="partner_universities">
+          <div className="text-center mb-12">
+            <span className="text-[10px] text-slate-400 font-extrabold tracking-widest block uppercase">Support Footprint</span>
+            <h2 className="text-2xl font-black text-slate-900 mt-2">Partnered South African Universities</h2>
+            <p className="text-xs text-slate-500 mt-2">Fully configured multi-tenant domain boundaries restricting unauthorised data traversal.</p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-6 gap-4 font-sans text-center" id="universities_grid">
+            {institutions.map((inst, i) => (
               <div
                 key={inst.id}
-                className="p-6 bg-white border border-outline-variant/50 rounded-xl hover:border-primary/30 hover:shadow-sm transition-all text-primary font-bold text-xs flex flex-col items-center justify-center gap-2 h-28"
+                className="bg-white border border-gray-200/80 p-5 rounded-xl flex flex-col items-center justify-center gap-1.5 hover:border-[#005A8D]/30 transition-all h-24 shadow-sm"
+                id={`univ_card_${i}`}
               >
-                <div className="w-8 h-8 rounded bg-primary-container/10 flex items-center justify-center text-xs text-primary">
-                  {inst.id.toUpperCase()}
+                <div className="text-xs font-black text-[#005A8D] uppercase font-mono bg-[#7FB3D5]/15 px-2 py-0.5 rounded">
+                  {inst.id}
                 </div>
-                <div className="font-extrabold tracking-tight leading-tight">{inst.name}</div>
-                <div className="text-[10px] text-on-surface-variant font-medium font-sans">{inst.location}</div>
+                <div className="font-extrabold text-slate-800 text-xs truncate max-w-full">{inst.name}</div>
+                <div className="text-[9px] text-slate-400 font-medium">{inst.location}</div>
               </div>
             ))}
           </div>
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-primary text-white py-12 px-6 mt-auto">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 border-b border-white/10 pb-8 mb-8 font-hanken">
+      {/* Modern SaaS Footer */}
+      <footer className="bg-[#001F3F] text-slate-400 border-t border-slate-800 py-12 px-6 mt-auto" id="footer_section">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-b border-slate-800 pb-8 mb-8 font-sans">
           <div>
-            <span className="text-headline-lg font-bold text-secondary-fixed">BursaryBridge</span>
-            <p className="text-xs text-primary-fixed-dim mt-2 max-w-sm font-sans leading-relaxed">
-              Empowering unfunded and missing-middle university students across South Africa with standard digital-first bursary access.
+            <div className="flex items-center gap-2 text-white">
+              <span className="font-black text-lg tracking-tight">Bursary<span className="text-[#7FB3D5]">Bridge</span></span>
+              <span className="bg-[#003B5C] text-gray-300 text-[9px] font-extrabold px-1.5 py-0.5 rounded tracking-wider uppercase font-mono">POPIA Compliant</span>
+            </div>
+            <p className="text-xs text-slate-500 mt-2 max-w-sm leading-relaxed">
+              Standard secure enrollment platform. Mapping missing middle and unallocated South African graduates with high-integrity corporate bursary awards.
             </p>
           </div>
-          <div className="flex flex-wrap gap-6 text-sm text-primary-fixed-dim font-sans">
-            <button className="hover:text-white transition-colors">Privacy Policy</button>
-            <button className="hover:text-white transition-colors">Terms of Service</button>
-            <button className="hover:text-white transition-colors">Compliance (POPIA)</button>
-            <button className="hover:text-white transition-colors">Institutional Support</button>
+
+          <div className="flex flex-wrap gap-x-8 gap-y-4 text-xs font-bold text-slate-300" id="footer_links">
+            <button onClick={onViewPolicies} className="hover:text-white transition-colors uppercase tracking-wider font-extrabold text-[#7FB3D5]" id="footer_policy_btn">
+              Terms &amp; Disclaimers (Ts &amp; Cs)
+            </button>
+            <span className="text-slate-700">|</span>
+            <button onClick={onViewPolicies} className="hover:text-white transition-colors uppercase tracking-wider font-bold">
+              POPIA Compliance Guidelines
+            </button>
+            <span className="text-slate-700">|</span>
+            <button onClick={onStartRegistration} className="hover:text-white transition-colors uppercase tracking-wider">
+              Verify Account
+            </button>
           </div>
         </div>
-        <div className="max-w-7xl mx-auto text-center md:text-left text-xs text-white/50">
-          &copy; 2026 BursaryBridge. Standard Government & Enterprise Partners Workspace. All rights reserved.
+
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-slate-500 font-medium font-sans">
+          <span>&copy; 2026 National Student Bursary Alliance. Registered B2B SaaS Network. All rights reserved.</span>
+          <span className="text-slate-600">Database Cluster ID: BR-991A5 (Multi-Tenant Secure Partition)</span>
         </div>
       </footer>
     </div>

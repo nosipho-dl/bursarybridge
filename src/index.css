@@ -6,63 +6,83 @@
   --font-headline: "Work Sans", sans-serif;
   --font-hanken: "Hanken Grotesk", sans-serif;
 
-  /* Custom Color Tokens from specifications */
-  --color-primary: #000a1e;
+  /* Custom Color Tokens mapped to Twilight Hues Palette */
+  --color-primary: #001F3F;
   --color-on-primary: #ffffff;
-  --color-primary-container: #002147;
-  --color-on-primary-container: #708ab5;
-  --color-inverse-primary: #aec7f6;
+  --color-primary-container: #003B5C;
+  --color-on-primary-container: #7FB3D5;
+  --color-inverse-primary: #7FB3D5;
   
-  --color-secondary: #795900;
+  --color-secondary: #005A8D;
   --color-on-secondary: #ffffff;
-  --color-secondary-container: #ffbf00;
-  --color-on-secondary-container: #6d5000;
+  --color-secondary-container: #7FB3D5;
+  --color-on-secondary-container: #001F3F;
   
-  --color-tertiary: #000e00;
+  --color-tertiary: #005A8D;
   --color-on-tertiary: #ffffff;
-  --color-tertiary-container: #002801;
-  --color-on-tertiary-container: #399c30;
+  --color-tertiary-container: #EAEDED;
+  --color-on-tertiary-container: #003B5C;
   
   --color-error: #ba1a1a;
   --color-on-error: #ffffff;
   --color-error-container: #ffdad6;
   --color-on-error-container: #93000a;
   
-  --color-surface: #f8f9fb;
-  --color-on-surface: #191c1e;
-  --color-surface-dim: #d9dadc;
-  --color-surface-bright: #f8f9fb;
+  --color-surface: #EAEDED;
+  --color-on-surface: #001F3F;
+  --color-surface-dim: #dfe3e5;
+  --color-surface-bright: #ffffff;
   --color-surface-container-lowest: #ffffff;
-  --color-surface-container-low: #f3f4f6;
-  --color-surface-container: #edeef0;
-  --color-surface-container-high: #e7e8ea;
-  --color-surface-container-highest: #e1e2e4;
-  --color-surface-variant: #e1e2e4;
-  --color-on-surface-variant: #44474e;
-  --color-inverse-surface: #2e3132;
-  --color-inverse-on-surface: #f0f1f3;
+  --color-surface-container-low: #f4f6f6;
+  --color-surface-container: #EAEDED;
+  --color-surface-container-high: #e1e5e6;
+  --color-surface-container-highest: #dfe3e5;
+  --color-surface-variant: #dfe3e5;
+  --color-on-surface-variant: #003B5C;
+  --color-inverse-surface: #001F3F;
+  --color-inverse-on-surface: #f4f6f6;
   
-  --color-outline: #74777f;
-  --color-outline-variant: #c4c6cf;
-  --color-surface-tint: #465f88;
+  --color-outline: #7FB3D5;
+  --color-outline-variant: #dfe3e5;
+  --color-surface-tint: #005A8D;
   
-  --color-primary-fixed: #d6e3ff;
-  --color-primary-fixed-dim: #aec7f6;
-  --color-on-primary-fixed: #001b3d;
-  --color-on-primary-fixed-variant: #2d476f;
+  --color-primary-fixed: #e2f0fb;
+  --color-primary-fixed-dim: #7FB3D5;
+  --color-on-primary-fixed: #001F3F;
+  --color-on-primary-fixed-variant: #003B5C;
   
-  --color-secondary-fixed: #ffdfa0;
-  --color-secondary-fixed-dim: #fbbc00;
-  --color-on-secondary-fixed: #261a00;
-  --color-on-secondary-fixed-variant: #5c4300;
+  --color-secondary-fixed: #e2f0fb;
+  --color-secondary-fixed-dim: #7FB3D5;
+  --color-on-secondary-fixed: #001F3F;
+  --color-on-secondary-fixed-variant: #003B5C;
   
-  --color-tertiary-fixed: #94fa81;
-  --color-tertiary-fixed-dim: #79dd68;
-  --color-on-tertiary-fixed: #002200;
-  --color-on-tertiary-fixed-variant: #005303;
+  --color-tertiary-fixed: #e2f0fb;
+  --color-tertiary-fixed-dim: #7FB3D5;
+  --color-on-tertiary-fixed: #001F3F;
+  --color-on-tertiary-fixed-variant: #003B5C;
   
-  --color-background: #f8f9fb;
-  --color-on-background: #191c1e;
+  --color-background: #EAEDED;
+  --color-on-background: #001F3F;
+
+  /* Tailwind Core Palette Mappings to enforce Twilight Hues globally */
+  --color-slate-50: #EAEDED;
+  --color-slate-100: #e1e5e6;
+  --color-slate-200: #dfe3e5;
+  --color-slate-300: #7FB3D5;
+  --color-slate-800: #003B5C;
+  --color-slate-900: #001F3F;
+  --color-slate-950: #000c19;
+
+  --color-blue-50: #f4f7fa;
+  --color-blue-100: #e2f0fb;
+  --color-blue-200: #c5def2;
+  --color-blue-300: #7FB3D5;
+  --color-blue-400: #4a9bd1;
+  --color-blue-500: #005A8D;
+  --color-blue-600: #004d78;
+  --color-blue-700: #003B5C;
+  --color-blue-800: #002e47;
+  --color-blue-900: #001F3F;
 
   /* Shapes & Rounded sizes */
   --radius-sm: 0.25rem;
